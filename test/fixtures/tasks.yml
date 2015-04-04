@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flow: MyString
+  product: MyString
+  doc_type: MyString
+  start_date: 2015-04-04
+  priority: 1
+  status: MyString
+  region: MyString
+  done: false
+  draft: 1
+  draft_submitted: 2015-04-04
+  completion_date: 2015-04-04
+  notes: MyText
+
+two:
+  flow: MyString
+  product: MyString
+  doc_type: MyString
+  start_date: 2015-04-04
+  priority: 1
+  status: MyString
+  region: MyString
+  done: false
+  draft: 1
+  draft_submitted: 2015-04-04
+  completion_date: 2015-04-04
+  notes: MyText
