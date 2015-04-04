@@ -22,7 +22,7 @@
   </thead>
 
   <tbody>
-    <% @tasks.each do |task| %>
+    <% @tasks.order(:priority).each do |task| %>
       <tr>
         <td><%= task.flow %></td>
         <td><%= task.product %></td>
