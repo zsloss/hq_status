@@ -8,16 +8,6 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
-  # GET /tasks/1
-  # GET /tasks/1.json
-  def show
-  end
-
-  # GET /tasks/new
-  def new
-    @task = Task.new
-  end
-
   # GET /tasks/1/edit
   def edit
   end
@@ -26,10 +16,10 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @tasks = Task.all
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
         format.json { render :index, status: :created, location: @task }
       else
         format.html { render :index }
