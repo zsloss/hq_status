@@ -10,10 +10,7 @@
       <th>Document</th>
       <th>Start date</th>
       <th>Status</th>
-      <th>Draft</th>
-      <th>Draft submitted</th>
-      <th>Notes</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -24,12 +21,8 @@
       <td><%= "#{task.product} A1 #{task.doc_type} 01 (#{task.region})" %></td>
       <td><%= task.start_date %></td>
       <td><%= task.status %></td>
-      <td><%= task.draft %></td>
-      <td><%= task.draft_submitted %></td>
-      <td><%= task.notes %></td>
-      <td><%= link_to 'Show', task %></td>
       <td><%= link_to 'Edit', edit_task_path(task) %></td>
-      <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
   </tbody>
@@ -37,6 +30,12 @@
 
 <br>
 
+<div class="row">
+<div class="col-sm-3">
+
 <h3>New Task</h3>
 
 <%= render 'form' %>
+
+</div>
+</div>

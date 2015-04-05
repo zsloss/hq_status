@@ -1,29 +1,28 @@
 <%= form_for(@task) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<% if @task.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @task.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :flow %><br>
-    <%= f.text_field :flow %>
-  </div>
-  <div class="field">
-    <%= f.label :product %><br>
-    <%= f.text_field :product %>
-  </div>
-  <div class="field">
-    <%= f.label :doc_type %><br>
-    <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual)) %>
-  </div>
-    <%= f.hidden_field :start_date, value: Date.today %>
+<div class="field form-group">
+  <%= f.label :flow, "Flow Number" %>
+    <%= f.text_field :flow, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :product, "Model Number" %>
+  <%= f.text_field :product, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :doc_type, "Document Type" %>
+  <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual)), {}, {class: "form-control"} %>
+</div>
 <!--   <div class="field">
     <%= f.label :start_date %><br>
     <%= f.date_select :start_date %> 
@@ -32,14 +31,13 @@
     <%= f.label :priority %><br>
     <%= f.number_field :priority %> 
   </div>-->
-  <%= f.hidden_field :status, value: "Queued" %>
 <!--   <div class="field">
     <%= f.label :status %><br>
     <%= f.select :status, options_for_select(%w(Queued In\ Progress Pending)) %> 
   </div> -->
-  <div class="field">
-    <%= f.label :region %><br>
-    <%= f.text_field :region, value: "HQ" %>
+  <div class="field form-group">
+    <%= f.label :region %>
+    <%= f.text_field :region, value: "HQ", class: "form-control" %>
   </div>
 <!--   <div class="field">
     <%= f.label :done %><br>
@@ -62,6 +60,7 @@
     <%= f.text_area :notes %> 
   </div>-->
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add Task", class: "btn btn-primary" %>
   </div>
-<% end %>
+
+  <% end %>
