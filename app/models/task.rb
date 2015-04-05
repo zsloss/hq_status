@@ -7,5 +7,6 @@ class Task < ActiveRecord::Base
 	private
 	def default_values
 		self.status ||= "Queued"
+		self.start_date ||= Date.today
 	end
 end

@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     @tasks = Task.all
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_path, notice: 'Task was successfully added.' }
         format.json { render :index, status: :created, location: @task }
       else
         format.html { render :index }
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url, notice: 'Task was successfully deleted.' }
       format.json { head :no_content }
     end
   end
