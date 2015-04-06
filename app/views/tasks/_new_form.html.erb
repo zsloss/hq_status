@@ -1,0 +1,34 @@
+<%= form_for(@task) do |f| %>
+
+<%= render 'shared/error_messages' %>
+
+<div class="field form-group">
+  <%= f.label :flow, "Flow Number" %>
+  <%= f.text_field :flow, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :product, "Model Number" %>
+  <%= f.text_field :product, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :revision, "Hardware Revision" %>
+  <%= f.text_field :revision, value: "A1", class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :doc_type, "Document Type" %>
+  <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual)), {}, {class: "form-control"} %>
+</div>
+<div class="field form-group">
+  <%= f.label :version, "Document Version" %>
+  <%= f.text_field :version, value: "01", class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :region %>
+  <%= f.text_field :region, value: "HQ", class: "form-control" %>
+</div>
+
+<div class="actions">
+  <%= f.submit "Add Task", class: "btn btn-primary" %>
+</div>
+
+<% end %>

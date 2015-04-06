@@ -5,7 +5,8 @@ class CreateTasks < ActiveRecord::Migration
       t.string :product
       t.string :doc_type
       t.date :start_date
-      t.integer :priority
+      t.string :revision
+      t.string :version
       t.string :status
       t.string :region
       t.boolean :done

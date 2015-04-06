@@ -1,0 +1,69 @@
+<%= form_for(@task) do |f| %>
+
+<%= render 'shared/error_messages' %>
+
+<br>
+<h4>Update Task Status</h4>
+
+
+<div class="field form-group">
+  <%= f.label :status, "Status" %>
+  <%= f.select :status, options_for_select(%w(Queued In\ Progress Pending)), {}, {class: "form-control"} %>
+</div>
+<div class="field form-group">
+  <%= f.label :draft, "Latest Draft" %>
+  <%= f.number_field :draft, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :draft_submitted, "Draft Submitted" %>
+  <%= f.date_field :draft_submitted, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :notes, "Notes" %>
+  <%= f.text_area :notes, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :done, "Done" %><br>
+  <%= f.check_box :done %>
+</div>
+<div class="field form-group">
+  <%= f.label :completion_date, "Completion Date" %>
+  <%= f.date_field :completion_date, class: "form-control" %>
+</div>
+
+<br>
+<h4>Edit Task Details</h4>
+
+<div class="field form-group">
+  <%= f.label :start_date, "Start Date" %>
+  <%= f.date_field :start_date, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :flow, "Flow Number" %>
+  <%= f.text_field :flow, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :product, "Model Number" %>
+  <%= f.text_field :product, class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :revision, "Hardware Revision" %>
+  <%= f.text_field :revision, value: "A1", class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :doc_type, "Document Type" %>
+  <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual)), {}, {class: "form-control"} %>
+</div>
+<div class="field form-group">
+  <%= f.label :version, "Document Version" %>
+  <%= f.text_field :version, value: "01", class: "form-control" %>
+</div>
+<div class="field form-group">
+  <%= f.label :region %>
+  <%= f.text_field :region, value: "HQ", class: "form-control" %>
+</div>
+
+<div class="actions">
+  <%= f.submit "Save Changes", class: "btn btn-primary" %>
+</div>
+<% end %>
