@@ -12,5 +12,7 @@ class Task < ActiveRecord::Base
 	def default_values
 		self.status ||= "Queued"
 		self.start_date ||= Date.today
+		self.done ||= false
+		return true # To prevent a false return value!
 	end
 end

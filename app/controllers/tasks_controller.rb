@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    init_index
     @task = Task.new
   end
 
@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    @tasks = Task.all
+    init_index
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully added.' }
@@ -54,6 +54,12 @@ class TasksController < ApplicationController
   end
 
   private
+  def init_index
+    @tasks = Task.all
+    @remaining_tasks = Task.where(done: false)
+    @finished_tasks = Task.where(done: true)
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
@@ -63,4 +69,4 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:flow, :product, :doc_type, :start_date, :version, :revision, :status, :region, :done, :draft, :draft_submitted, :completion_date, :notes)
     end
-end
+  end
