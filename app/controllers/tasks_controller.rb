@@ -10,22 +10,19 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @user_id = params[:user_id]
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    init_index
-    if user_id = params[:user_id]
-      @task.writer_id = user_id
-    end
+    @task.writer_id = flash[:user_created]    
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully added.' }
+        format.html { redirect_to flash[:user_created] ? user_tasks_path(flash[:user_created]) : tasks_path, notice: 'Task was successfully added.' }
         format.json { render :index, status: :created, location: @task }
       else
+        init_index
         format.html { render :index }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -64,6 +61,7 @@ class TasksController < ApplicationController
       @remaining_tasks = Task.where(writer_id: user_id, done: false)
       @peer_reviews = Task.where(reviewer_id: user_id, done: false)
       @finished_tasks = Task.where(done: true)
+      flash[:user_created] = user_id
     else
       @remaining_tasks = Task.where(done: false)
       @finished_tasks = Task.where(done: true)

@@ -34,12 +34,10 @@
 <br>
 <h4>Edit Task Details</h4>
 
-<% unless @user_id %>
 <div class="field form-group">
   <%= f.label :writer_id, "Writer" %>
-  <%= f.select :writer_id, options_for_select(User.get_options_for_select, @task.writer_id), {}, {class: "form-control"} %>
+  <%= f.select :writer_id, options_for_select({ "Unassigned" => nil }.merge(User.get_options_for_select), @task.writer_id), {}, {class: "form-control"} %>
 </div>
-<% end %>
 
 <div class="field form-group">
   <%= f.label :reviewer_id, "Peer Reviewer" %>
