@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404142108) do
+ActiveRecord::Schema.define(version: 20150411094635) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "flow"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20150404142108) do
     t.date     "draft_submitted"
     t.date     "completion_date"
     t.text     "notes"
+    t.integer  "writer_id"
+    t.integer  "reviewer_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "tasks", ["reviewer_id"], name: "index_tasks_on_reviewer_id"
+  add_index "tasks", ["writer_id"], name: "index_tasks_on_writer_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

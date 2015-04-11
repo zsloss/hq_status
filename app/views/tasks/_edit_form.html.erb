@@ -8,7 +8,7 @@
 
 <div class="field form-group">
   <%= f.label :status, "Status" %>
-  <%= f.select :status, options_for_select(%w(Queued In\ Progress Pending)), {}, {class: "form-control"} %>
+  <%= f.select :status, options_for_select(%w(Queued In\ Progress Pending), @task.status), {}, {class: "form-control"} %>
 </div>
 <div class="field form-group">
   <%= f.label :draft, "Latest Draft" %>
@@ -34,6 +34,22 @@
 <br>
 <h4>Edit Task Details</h4>
 
+<% unless @user_id %>
+<div class="field form-group">
+  <%= f.label :writer_id, "Writer" %>
+  <%= f.select :writer_id, options_for_select(User.get_options_for_select, @task.writer_id), {}, {class: "form-control"} %>
+</div>
+<% end %>
+
+<div class="field form-group">
+  <%= f.label :reviewer_id, "Peer Reviewer" %>
+  <%= f.select :reviewer_id, options_for_select({ "None" => nil }.merge(User.get_options_for_select), @task.reviewer_id), {}, {class: "form-control"} %>
+</div>
+
+<div class="field form-group">
+  <%= f.label :start_date, "Start Date" %>
+  <%= f.date_field :start_date, class: "form-control" %>
+</div>
 <div class="field form-group">
   <%= f.label :start_date, "Start Date" %>
   <%= f.date_field :start_date, class: "form-control" %>

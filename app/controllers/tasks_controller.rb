@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
-  # GET /tasks
+  # GET /users/1/tasks
   # GET /tasks.json
   def index
     init_index
@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    @user_id = params[:user_id]
   end
 
   # POST /tasks
@@ -17,6 +18,9 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     init_index
+    if user_id = params[:user_id]
+      @task.writer_id = user_id
+    end
     respond_to do |format|
       if @task.save
         format.html { redirect_to tasks_path, notice: 'Task was successfully added.' }
@@ -56,8 +60,14 @@ class TasksController < ApplicationController
   private
   def init_index
     @tasks = Task.all
-    @remaining_tasks = Task.where(done: false)
-    @finished_tasks = Task.where(done: true)
+    if user_id = params[:user_id]
+      @remaining_tasks = Task.where(writer_id: user_id, done: false)
+      @peer_reviews = Task.where(reviewer_id: user_id, done: false)
+      @finished_tasks = Task.where(done: true)
+    else
+      @remaining_tasks = Task.where(done: false)
+      @finished_tasks = Task.where(done: true)
+    end
   end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -67,6 +77,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:flow, :product, :doc_type, :start_date, :version, :revision, :status, :region, :done, :draft, :draft_submitted, :completion_date, :notes)
+      params.require(:task).permit(:writer_id, :reviewer_id, :flow, :product, :doc_type, :start_date, :version, :revision, :status, :region, :done, :draft, :draft_submitted, :completion_date, :notes)
     end
   end

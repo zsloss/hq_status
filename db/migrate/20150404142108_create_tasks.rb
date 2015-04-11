@@ -14,8 +14,12 @@ class CreateTasks < ActiveRecord::Migration
       t.date :draft_submitted
       t.date :completion_date
       t.text :notes
-
+      t.integer :writer_id
+      t.integer :reviewer_id
       t.timestamps null: false
+
+      t.index :writer_id
+      t.index :reviewer_id
     end
   end
 end
