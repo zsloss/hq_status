@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :destroy]
+	before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def new
   	@user = User.new
@@ -25,6 +25,15 @@ class UsersController < ApplicationController
 
   def edit
 
+  end
+
+  def show
+  	@task = Task.new
+	@remaining_tasks = @user.tasks.where(done: false)
+    @peer_reviews = @user.peer_reviews.where(done: false)
+    @finished_tasks = @user.tasks.where(done: true)
+    session[:return_to] = request.fullpath
+    flash[:user_created] = @user.id
   end
 
   def update

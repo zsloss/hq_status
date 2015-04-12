@@ -1,0 +1,93 @@
+
+<h1><%= @user.name %>'s Tasks</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Flow</th>
+      <th>Document</th>
+      <th>Start date</th>
+      <th>Status</th>
+      <th>Latest Draft</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @remaining_tasks.each do |task| %>
+    <tr>
+      <td><%= task.flow %></td>
+      <td><%= "#{task.product} #{task.revision} #{task.doc_type} #{task.version} (#{task.region})" %></td>
+      <td><%= task.start_date %></td>
+      <td><%= task.status %></td>
+      <td>
+        <% if task.draft and task.draft_submitted %>
+        <%= "Draft #{task.draft} (#{task.days_since_draft} #{'day'.pluralize(task.days_since_draft)} ago)" %>
+        <% end %>
+      </td>
+      <td>
+        <%= form_for task do |f| %>
+        <%= f.hidden_field :draft, value: task.draft ? task.draft + 1 : 1 %>
+        <%= f.hidden_field :draft_submitted, value: Date.today %>
+        <%= f.hidden_field :status, value: "Pending" %>
+        <%= f.submit "Draft Sent", class: "btn btn-default" %>
+        <% end %>
+      </td>
+      <td>
+        <%= form_for task do |f| %>
+        <%= f.hidden_field :done, value: true %>
+        <%= f.hidden_field :completion_date, value: Date.today %>
+        <%= f.submit "Done", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Edit', edit_task_path(task) %></td>
+      <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-3">
+
+    <h3>New Task</h3>
+
+    <%= render 'shared/new_form' %>
+
+  </div>
+</div>
+
+<br>
+<h3>Completed Tasks</h3>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Flow</th>
+      <th>Document</th>
+      <th>Completion Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @finished_tasks.each do |task| %>
+    <tr>
+      <td><%= task.flow %></td>
+      <td><%= "#{task.product} #{task.revision} #{task.doc_type} #{task.version} (#{task.region})" %></td>
+      <td>
+        <%= task.completion_date ? task.completion_date : '' %>
+      </td>      
+      <td>
+        <%= form_for task do |f| %>
+        <%= f.hidden_field :done, value: false %>
+        <%= f.hidden_field :completion_date, value: nil %>
+        <%= f.submit "Resurrect", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Edit', edit_task_path(task) %></td>
+      <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -4,13 +4,15 @@ class TasksController < ApplicationController
   # GET /users/1/tasks
   # GET /tasks.json
   def index
-    init_index
+    @users = User.all
+    @unassigned = Task.where(writer_id: nil)
     @task = Task.new
+    session[:return_to] = request.fullpath
   end
 
   # GET /tasks/1/edit
   def edit
-    session[:return_to] ||= request.referer
+    session[:return_to] = request.referer
   end
 
   # POST /tasks
@@ -35,7 +37,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to session[:return_to], notice: 'Task was successfully updated.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Task was successfully updated.' }
         format.json { render :index, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -55,19 +57,6 @@ class TasksController < ApplicationController
   end
 
   private
-  def init_index
-    @tasks = Task.all
-    if user_id = params[:user_id]
-      @remaining_tasks = Task.where(writer_id: user_id, done: false)
-      @peer_reviews = Task.where(reviewer_id: user_id, done: false)
-      @finished_tasks = Task.where(done: true)
-      flash[:user_created] = user_id
-    else
-      @remaining_tasks = Task.where(done: false)
-      @finished_tasks = Task.where(done: true)
-    end
-  end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])

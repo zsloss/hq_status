@@ -1,6 +1,18 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+h1 {
+	margin-bottom: 50px;
+}
+
+table.table {
+ 	margin-bottom: 50px;
+}
+
+form {
+	margin-bottom: 50px;
+}
+
 div.links {
 	margin-bottom: 50px;
 	ul {
