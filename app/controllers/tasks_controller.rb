@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    session[:return_to] ||= request.referer
   end
 
   # POST /tasks
@@ -34,7 +35,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to :back, notice: 'Task was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Task was successfully updated.' }
         format.json { render :index, status: :ok, location: @task }
       else
         format.html { render :edit }

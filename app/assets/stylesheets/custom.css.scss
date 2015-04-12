@@ -1,2 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+div.links {
+	margin-bottom: 50px;
+	ul {
+		list-style: none;
+		float: right;
+		li {
+			font-size: 16px;
+			margin-bottom: 6px;
+		}
+	}
+}
