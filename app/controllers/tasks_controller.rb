@@ -1,5 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :admin_only, only: [:index]
+  before_action :correct_owner, only: [:edit, :destroy]
+  before_action :correct_owner_or_reviewer, only: [:update]
 
   # GET /users/1/tasks
   # GET /tasks.json
@@ -57,10 +60,8 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
+
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params

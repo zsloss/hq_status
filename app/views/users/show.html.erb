@@ -25,21 +25,21 @@
         <%= "Draft #{task.draft} (#{task.days_since_draft} #{'day'.pluralize(task.days_since_draft)} ago)" %>
         <% end %>
       </td>
-      <td>
-        <%= form_for task do |f| %>
+      <%= form_for task do |f| %>
+      <td>        
         <%= f.hidden_field :draft, value: task.draft ? task.draft + 1 : 1 %>
         <%= f.hidden_field :draft_submitted, value: Date.today %>
         <%= f.hidden_field :status, value: "Pending" %>
-        <%= f.submit "Draft Sent", class: "btn btn-default" %>
-        <% end %>
+        <%= f.submit "Draft Sent", class: "btn btn-default" %>        
       </td>
+      <% end %>
+      <%= form_for task do |f| %>
       <td>
-        <%= form_for task do |f| %>
         <%= f.hidden_field :done, value: true %>
         <%= f.hidden_field :completion_date, value: Date.today %>
         <%= f.submit "Done", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
-        <% end %>
       </td>
+      <% end %>      
       <td><%= link_to 'Edit', edit_task_path(task) %></td>
       <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
