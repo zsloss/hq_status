@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 					format: { with: VALID_EMAIL_REGEX }, length: { maximum: 255 }
 
 	has_secure_password
-	validates :password, length: { minimum: 3 }
+	validates :password, length: { minimum: 3 }, allow_blank: true
 
 	# Returns a hash in the form { name => id, ... }
 	def self.get_options_for_select

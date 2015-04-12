@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
 
   # GET /users/1/tasks
   # GET /tasks.json
@@ -16,10 +16,10 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    @task.writer_id = flash[:user_created]    
+    @task.writer_id ||= flash[:user_created]    
     respond_to do |format|
       if @task.save
-        format.html { redirect_to flash[:user_created] ? user_tasks_path(flash[:user_created]) : tasks_path, notice: 'Task was successfully added.' }
+        format.html { redirect_to :back, notice: 'Task was successfully added.' }
         format.json { render :index, status: :created, location: @task }
       else
         init_index
@@ -34,8 +34,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        @tasks = Task.all
-        format.html { redirect_to tasks_path, notice: 'Task was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Task was successfully updated.' }
         format.json { render :index, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -49,7 +48,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully deleted.' }
+      format.html { redirect_to :back, notice: 'Task was successfully deleted.' }
       format.json { head :no_content }
     end
   end
