@@ -32,7 +32,16 @@ class UsersController < ApplicationController
 
 	def show
 		@task = Task.new
+		params[:sort_by] ||= "status"
 		@remaining_tasks = @user.tasks.where(done: false)
+
+		# Sort the remaining tasks
+		criterion = Proc.new { |t| t.send params[:sort_by] } # attribute to sort by stored in params
+		sorted_tasks = @remaining_tasks.select(&criterion).sort_by(&criterion)
+		nil_attr_tasks = @remaining_tasks.reject(&criterion)
+		@remaining_tasks = sorted_tasks + nil_attr_tasks # nil attributes at the end
+		@remaining_tasks.reverse! if params[:order_by] == 'desc'
+
 		@peer_reviews = @user.peer_reviews.where(done: false)
 		@finished_tasks = @user.tasks.where(done: true)
 		session[:return_to] = request.fullpath

@@ -4,11 +4,11 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Flow</th>
-      <th>Document</th>
-      <th>Start date</th>
-      <th>Status</th>
-      <th>Latest Draft</th>
+      <th><%= link_to "Flow", { action: action_name }.merge(sort_params 'flow') %></th>
+      <th><%= link_to "Document", { action: action_name }.merge(sort_params 'product') %></th>
+      <th><%= link_to "Start Date", { action: action_name }.merge(sort_params 'start_date') %></th>
+      <th><%= link_to "Status", { action: action_name }.merge(sort_params 'status') %></th>
+      <th><%= link_to "Latest Draft", { action: action_name }.merge(sort_params 'draft_submitted') %></th>
       <th colspan="4"></th>
     </tr>
   </thead>
