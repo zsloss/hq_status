@@ -14,9 +14,11 @@
   </div>
 </div>
 
+<div style="margin-top: 50px;">
 <% @users.each do |user| %>
 <h2><%= user.name %></h2>
 
 <%= render 'tasks_table', tasks: user.tasks, unassigned: false %>
 
 <% end %>
+</div>
