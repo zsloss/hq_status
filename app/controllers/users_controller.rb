@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.all
+		session[:return_to] = request.fullpath
 	end
 
 	def edit
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
 	def update
 		respond_to do |format|
 			if @user.update(user_params)
-				format.html { redirect_to :back, notice: 'User was successfully updated.' }
+				format.html { redirect_to session.delete(:return_to), notice: 'User was successfully updated.' }
 				format.json { render :index, status: :ok, location: @user }
 			else
 				format.html { render :edit }
