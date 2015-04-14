@@ -50,10 +50,6 @@
   <%= f.date_field :start_date, class: "form-control" %>
 </div>
 <div class="field form-group">
-  <%= f.label :start_date, "Start Date" %>
-  <%= f.date_field :start_date, class: "form-control" %>
-</div>
-<div class="field form-group">
   <%= f.label :flow, "Flow Number" %>
   <%= f.text_field :flow, class: "form-control" %>
 </div>
@@ -63,19 +59,19 @@
 </div>
 <div class="field form-group">
   <%= f.label :revision, "Hardware Revision" %>
-  <%= f.text_field :revision, value: "A1", class: "form-control" %>
+  <%= f.text_field :revision, class: "form-control" %>
 </div>
 <div class="field form-group">
   <%= f.label :doc_type, "Document Type" %>
-  <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual)), {}, {class: "form-control"} %>
+  <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual), @task.doc_type), {}, {class: "form-control"} %>
 </div>
 <div class="field form-group">
   <%= f.label :version, "Document Version" %>
-  <%= f.text_field :version, value: "01", class: "form-control" %>
+  <%= f.text_field :version, class: "form-control" %>
 </div>
 <div class="field form-group">
   <%= f.label :region %>
-  <%= f.text_field :region, value: "HQ", class: "form-control" %>
+  <%= f.text_field :region, class: "form-control" %>
 </div>
 
 <div class="actions">
