@@ -1,3 +1,5 @@
+<h3>New Task</h3>
+
 <%= form_for(@task) do |f| %>
 
 <%= render 'error_messages' %>
@@ -15,8 +17,22 @@
   <%= f.text_field :revision, value: "A1", class: "form-control" %>
 </div>
 <div class="field form-group">
-  <%= f.label :doc_type, "Document Type" %>
-  <%= f.select :doc_type, options_for_select(%w(Datasheet QIG Manual)), {}, {class: "form-control"} %>
+  <%= f.label :documents do %>
+  <%= f.check_box :documents, { multiple: true }, "Datasheet", nil %>
+  <span>Datasheet</span>
+  <% end %>
+  </div>
+  <div class="field form-group">
+  <%= f.label :documents do %>
+  <%= f.check_box :documents, { multiple: true }, "QIG", nil %>
+  <span>QIG</span>
+  <% end %>
+  </div>
+  <div class="field form-group">
+  <%= f.label :documents do %>
+  <%= f.check_box :documents, { multiple: true }, "Manual", nil %>
+  <span>Manual</span>
+  <% end %>
 </div>
 <div class="field form-group">
   <%= f.label :version, "Document Version" %>

@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+	attr_accessor :documents
+
 	belongs_to :writer, class_name: 'User'
 	belongs_to :peer_reviewer, class_name: 'User'
 

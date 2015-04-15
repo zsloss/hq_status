@@ -21,18 +21,25 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-    @task.writer_id ||= flash[:user_created]    
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to :back, notice: 'Task was successfully added.' }
-        format.json { render :index, status: :created, location: @task }
-      else
-        init_index
-        format.html { render :index }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+
+    # Deal with no documents selected
+    if params[:task][:documents].nil?
+      flash.now[:alert] = "Please select at least one document type."
+      @task = Task.new(task_params)
+      flash.keep :user_created
+      render 'shared/_new_form' and return
     end
+
+    # Save each document type in a separate task
+    params[:task][:documents].each do |doc_type|
+      @task = Task.new(task_params)
+      @task.doc_type = doc_type
+      @task.writer_id ||= flash[:user_created]
+
+      render 'shared/_new_form' and return unless @task.save
+    end
+
+    redirect_to session.delete(:return_to), notice: params[:task][:documents].length > 1 ? 'Tasks were successfully added.' : 'Task was successfully added.'
   end
 
   # PATCH/PUT /tasks/1
@@ -60,9 +67,6 @@ class TasksController < ApplicationController
   end
 
   private
-
-
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:writer_id, :reviewer_id, :flow, :product, :doc_type, :start_date, :version, :revision, :status, :region, :done, :draft, :draft_submitted, :completion_date, :notes)
