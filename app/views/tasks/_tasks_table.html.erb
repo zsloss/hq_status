@@ -21,7 +21,7 @@
     <% tasks.each do |task| %>
     <tr>
       <td><%= task.flow %></td>
-      <td><%= "#{task.product} #{task.revision} #{task.doc_type} #{task.version} (#{task.region})" %></td>
+      <td><%= task.name %></td>
       <td><%= task.start_date %></td>
       <td><%= task.status %></td>
       <% if unassigned %>
@@ -38,7 +38,7 @@
         <% else %>
         <td>
         <% if task.draft and task.draft_submitted %>
-        <%= "Draft #{task.draft} (#{task.days_since_draft} #{'day'.pluralize(task.days_since_draft)} ago)" %>
+        <%= "Draft #{task.draft} (#{days_ago task.draft_submitted})" %>
         <% end %>
         <% end %>
       </td>      

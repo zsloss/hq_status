@@ -8,6 +8,7 @@ class Task < ActiveRecord::Base
 	validates :doc_type, inclusion: { in: %w(Datasheet Manual QIG), message: "must be a Datasheet, Manual, or QIG" }
 	validates :status, inclusion: { in: %w(Queued In\ Progress Pending), message: "must be Queued, In Progress, or Pending" }
 	validates :review_status, inclusion: { in: %w(Not\ Sent Sent Reviewed), message: "must be Not Sent or Sent, or Reviewed" }
+	validate :writer_not_pr
 	before_validation :default_values
 
 	def name
@@ -29,5 +30,9 @@ class Task < ActiveRecord::Base
 		self.done ||= false
 		self.review_status ||= "Not Sent"
 		return true # To prevent a false return value!
+	end
+
+	def writer_not_pr
+		errors.add(:reviewer_id, "should not be the writer") if (not self.writer_id.nil?) and self.reviewer_id == self.writer_id
 	end
 end
