@@ -7,44 +7,60 @@
       <th><%= sort_link "Status", "status" %></th>
 
       <% if unassigned %>
-      <th>Writer</th>
-            <th>Reviewer</th>
-      <th colspan="3"></th>
+        <th>Writer</th>
+        <th>Reviewer</th>
+        <th colspan="3"></th>
       <% else %>
-      <th><%= sort_link "Latest Draft", "draft_submitted" %></th>
-      <th colspan="2"></th>
+        <th><%= sort_link "Latest Draft", "draft_submitted" %></th>
+        <th>Peer Review</th>
+        <th colspan="2"></th>
       <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% tasks.each do |task| %>
-    <tr>
-      <td><%= task.flow %></td>
-      <td><%= task.name %></td>
-      <td><%= task.start_date %></td>
-      <td><%= task.status %></td>
-      <% if unassigned %>
-        <%= form_for task do |f| %>
-      <td>        
-        <%= f.select :writer_id, options_for_select({ "Unassigned" => nil }.merge(User.get_options_for_select), @task.writer_id), {}, {class: "form-control"} %>        
-        </td>
-        <td>
-        <%= f.select :reviewer_id, options_for_select({ "None" => nil }.merge(User.get_options_for_select), @task.reviewer_id), {}, {class: "form-control"} %>
-        </td>
-        <td>
-        <%= f.submit "Assign", { class: "btn btn-default" } %>
-        <% end %>
+      <tr>
+        <td><%= task.flow %></td>
+        <td><%= task.name %></td>
+        <td><%= task.start_date %></td>
+        <td><%= task.status %></td>
+        <% if unassigned %>
+          <%= form_for task do |f| %>
+            <td>        
+              <%= f.select :writer_id, options_for_select({ "Unassigned" => nil }.merge(User.get_options_for_select), @task.writer_id), {}, {class: "form-control"} %>        
+            </td>
+            <td>
+              <%= f.select :reviewer_id, options_for_select({ "None" => nil }.merge(User.get_options_for_select), @task.reviewer_id), {}, {class: "form-control"} %>
+            </td>
+            <td>
+              <%= f.submit "Assign", { class: "btn btn-default" } %>
+            </td>
+          <% end %>
         <% else %>
-        <td>
-        <% if task.draft and task.draft_submitted %>
-        <%= "Draft #{task.draft} (#{days_ago task.draft_submitted})" %>
-        <% end %>
-        <% end %>
-      </td>      
-      <td><%= link_to 'Edit', edit_task_path(task) %></td>
-      <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+          <td>
+            <% if task.draft and task.draft_submitted %>
+            <%= "Draft #{task.draft} (#{days_ago task.draft_submitted})" %>
+            <% end %>
+          </td>
+
+          <td>
+            <% if task.reviewer_id.nil? %>
+              No peer reviewer
+            <% elsif task.review_status == "Reviewed" %>
+              <span class="glyphicon glyphicon-ok"></span>
+              Peer reviewed by <strong><%= task.reviewer %></strong> <%= "(#{days_ago task.review_date})" %>
+            <% elsif task.review_status == "Sent" %>
+              Sent to <strong><%= task.reviewer %></strong> for PR <%= task.review_sent_date.nil? ? "" : "(#{days_ago task.review_sent_date})" %>
+            <% else %>
+              Not yet sent to <strong><%= task.reviewer %></strong>
+            <% end %> 
+          </td>
+        <% end %>           
+         
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
