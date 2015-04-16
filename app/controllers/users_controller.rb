@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 
 		@remaining_tasks = sort_tasks(@remaining_tasks)
 
-		@peer_reviews = @user.peer_reviews.where(done: false)
+		@peer_reviews = @user.peer_reviews.where(done: false).where.not(review_status: "Reviewed")
 		@finished_tasks = @user.tasks.where(done: true)
 		session[:return_to] = request.fullpath
 		flash[:user_created] = @user.id

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150411094635) do
+ActiveRecord::Schema.define(version: 20150416145841) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "flow"
@@ -29,10 +29,14 @@ ActiveRecord::Schema.define(version: 20150411094635) do
     t.text     "notes"
     t.integer  "writer_id"
     t.integer  "reviewer_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "review_status"
+    t.date     "review_sent_date"
+    t.date     "review_date"
   end
 
+  add_index "tasks", ["review_status"], name: "index_tasks_on_review_status"
   add_index "tasks", ["reviewer_id"], name: "index_tasks_on_reviewer_id"
   add_index "tasks", ["writer_id"], name: "index_tasks_on_writer_id"
 

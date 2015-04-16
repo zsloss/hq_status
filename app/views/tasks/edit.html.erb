@@ -23,9 +23,21 @@
   <%= f.label :notes, "Notes" %>
   <%= f.text_area :notes, class: "form-control" %>
 </div>
+<br>
 <div class="field form-group">
-  <%= f.label :done, "Done" %><br>
+  <%= f.label :review_status, "Peer Review Status" %>
+  <%= f.select :review_status, options_for_select(%w(Not\ Sent Sent Reviewed), @task.review_status), {}, {class: "form-control"} %>
+</div>
+<div class="field form-group">
+  <%= f.label :review_date, "Peer Review Completion Date" %>
+  <%= f.date_field :review_date, class: "form-control" %>
+</div>
+<br>
+<div class="field form-group">
+  <%= f.label :done do %>
   <%= f.check_box :done %>
+  <span>Task Completed</span>
+  <% end %>
 </div>
 <div class="field form-group">
   <%= f.label :completion_date, "Completion Date" %>
