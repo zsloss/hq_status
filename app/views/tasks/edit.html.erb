@@ -29,6 +29,10 @@
   <%= f.select :review_status, options_for_select(%w(Not\ Sent Sent Reviewed), @task.review_status), {}, {class: "form-control"} %>
 </div>
 <div class="field form-group">
+  <%= f.label :review_sent_date, "Peer Review Sent Date" %>
+  <%= f.date_field :review_sent_date, class: "form-control" %>
+</div>
+<div class="field form-group">
   <%= f.label :review_date, "Peer Review Completion Date" %>
   <%= f.date_field :review_date, class: "form-control" %>
 </div>
