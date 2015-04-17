@@ -13,7 +13,7 @@
 </div>
 <div class="field form-group">
   <%= f.label :draft, "Latest Draft" %>
-  <%= f.number_field :draft, class: "form-control" %>
+  <%= f.number_field :draft, min: 1, class: "form-control" %>
 </div>
 <div class="field form-group">
   <%= f.label :draft_submitted, "Draft Submitted" %>
