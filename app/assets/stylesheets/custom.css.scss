@@ -9,6 +9,10 @@ table.table {
  	margin-bottom: 50px;
 }
 
+table.table > tbody > tr > td {
+	vertical-align: middle;
+}
+
 .navbar-btn {
 	margin-left: 10px;
 }

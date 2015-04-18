@@ -21,7 +21,12 @@
       <td><%= task.flow %></td>
       <td><%= task.name %></td>
       <td><%= task.start_date %></td>
-      <td><%= task.status %></td>
+
+      <td>
+        <%= form_for task do |f| %>
+        <%= f.select :status, options_for_select(%w(Queued In\ Progress Pending), task.status), {}, { onchange: "this.form.submit()", class: "form-control" } %>
+        <% end %>
+      </td>
 
       <td>
         <% if task.draft and task.draft_submitted %>
@@ -35,12 +40,14 @@
         <%= f.hidden_field :draft_submitted, value: Date.today %>
         <%= f.hidden_field :status, value: "Pending" %>
         <%= f.submit "Draft Sent", class: "btn btn-default" %>      
-        <% end %>  
+        <% end %>
       </td>     
 
       <td>
       <% if task.reviewer_id.nil? %>
-        No peer reviewer
+        <%= form_for task do |f| %>
+        <%= f.select :reviewer_id, options_for_select({ "None" => nil }.merge(User.get_options_for_select.except(@user.name)), task.reviewer_id), {}, { onchange: "this.form.submit()", class: "form-control" } %>
+        <% end %>
       <% elsif task.review_status == "Reviewed" %>
         <span class="glyphicon glyphicon-ok"></span>
         Peer reviewed by <strong><%= task.reviewer %></strong>
