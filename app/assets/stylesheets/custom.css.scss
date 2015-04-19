@@ -5,14 +5,6 @@ h1 {
 	margin-bottom: 50px;
 }
 
-table.table {
- 	margin-bottom: 50px;
-}
-
-table.table > tbody > tr > td {
-	vertical-align: middle;
-}
-
 .navbar-btn {
 	margin-left: 10px;
 }
@@ -23,4 +15,108 @@ table.table > tbody > tr > td {
 
 .glyphicon-remove {
 	color: red;
+}
+
+.panel-heading, .panel-body {
+	form, button, select {
+		display: inline-block;
+	}
+}
+
+.panel-heading {
+	height: 60px;
+
+	a {
+		text-decoration: none;
+	}
+
+	  div {
+		display: inline-block;
+
+		&.task-name {
+			width: 40%;
+
+			span {
+				font-weight: bold;
+							font-size: 18px;
+				
+				word-spacing: 5px;
+			}
+		}
+
+		&.status {
+			width: 20%;
+			select {
+				width: 130px;
+			}
+		}
+
+		&.draft {
+			
+		}	
+
+		span {
+			margin-left: 15px;
+			margin-right: 15px;
+		}
+	}
+}
+
+.panel-body {
+	height: 150px;
+	vertical-align: top;
+
+	> div {
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	div.task-info {
+
+		margin-right: 50px;
+		div {
+			display: block;
+			margin-bottom: 20px;
+		}	
+
+		.flow {
+
+		}
+
+		.start-date {
+
+		}
+
+		.peer-review {
+		}
+
+	}
+
+	.notes {
+		width: 70%;
+
+		form {
+			width: 80%;
+			.btn {
+				float: right;
+			}
+		}
+
+		textarea {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.task-actions {
+		width: 85px;
+		float: right;
+		span.glyphicon-pencil, span.glyphicon-trash {
+			margin: 0 10px 0 10px;
+		}
+
+		.done {
+			margin-bottom: 60px;
+		}
+	}
 }

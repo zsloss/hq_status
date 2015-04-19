@@ -1,15 +1,8 @@
 body {
-  background-color: #fff;
+  background-color: #fcfcfc;
   color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+  font-family: helvetica, arial, verdana, sans-serif;
+  font-size: 14px;
 }
 
 pre {
@@ -21,14 +14,11 @@ pre {
 a {
   color: #000;
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #000;
   }
-}
 
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
+  &:focus {
+    color: #000;
   }
 }
 
