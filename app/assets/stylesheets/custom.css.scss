@@ -72,7 +72,7 @@ h1 {
 	}
 
 	div.task-info {
-
+		width: 240px;
 		margin-right: 50px;
 		div {
 			display: block;
@@ -93,10 +93,10 @@ h1 {
 	}
 
 	.notes {
-		width: 70%;
+		width: 60%;
 
 		form {
-			width: 80%;
+			width: 100%;
 			.btn {
 				float: right;
 			}
@@ -109,6 +109,7 @@ h1 {
 	}
 
 	.task-actions {
+		display: block;
 		width: 85px;
 		float: right;
 		span.glyphicon-pencil, span.glyphicon-trash {
