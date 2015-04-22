@@ -72,11 +72,11 @@
             <% end %>       
           </div>
           <%= link_to edit_task_path(task) do %>
-          <span class="glyphicon glyphicon-pencil"></span>
+          <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Edit Task"></span>
           <% end %>
 
           <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <span class="glyphicon glyphicon-trash"></span>
+          <span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Task"></span>
           <% end %>          
         </div>
 
@@ -202,44 +202,44 @@
 
 <div class="panel-group" id="remaining-tasks">
   <div class="panel panel-default">
-<% @finished_tasks.each do |task| %>
-<div class="panel-heading">
+    <% @finished_tasks.each do |task| %>
+    <div class="panel-heading">
 
-<div class="task-name">    
+      <div class="task-name">    
         <span>
           <%= task.name %>
         </span>
       </div>
-<div class="flow">
+      <div class="flow">
         <span>
           <%= task.flow %>
         </span>
       </div>
-<div class="completion-date">
+      <div class="completion-date">
         <span>
-<%= task.completion_date.strftime("%B #{task.start_date.day.ordinalize}") or '' %>
-</span>
-</div>
+          <%= task.completion_date.strftime("%B #{task.start_date.day.ordinalize}") or '' %>
+        </span>
+      </div>
 
-<div class="resurrect">
-<%= form_for task do |f| %>
-<%= f.hidden_field :done, value: false %>
-<%= f.hidden_field :completion_date, value: nil %>
-<%= f.submit "Resurrect", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
-<% end %>
-</div>
+      <div class="resurrect">
+        <%= form_for task do |f| %>
+        <%= f.hidden_field :done, value: false %>
+        <%= f.hidden_field :completion_date, value: nil %>
+        <%= f.submit "Resurrect", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
+        <% end %>
+      </div>
 
-<div class="task-actions"
-<%= link_to edit_task_path(task) do %>
-          <span class="glyphicon glyphicon-pencil"></span>
-          <% end %>
+      <div class="task-actions"
+      <%= link_to edit_task_path(task) do %>
+      <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Edit Task"></span>
+      <% end %>
 
-          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
-          <span class="glyphicon glyphicon-trash"></span>
-          <% end %>  
-          </div> 
+      <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Delete Task"></span>
+      <% end %>  
+    </div> 
 
-</div>
-<% end %>
+  </div>
+  <% end %>
 </div>
 </div>

@@ -91,12 +91,6 @@ $writerWidth: 10%;
 			margin-right: $plusMinusMargin;
 		}
 
-		&.flow, &.task-name {
-			span {			
-				font-size: 18px;
-			}
-		}
-
 		&.flow {
 		width: $flowWidth;
 		}
@@ -104,7 +98,8 @@ $writerWidth: 10%;
 		&.task-name {
 			width: $taskWidth;
 
-			span {				
+			span {			
+				font-size: 18px;
 				font-weight: bold;
 				word-spacing: 5px;
 			}
