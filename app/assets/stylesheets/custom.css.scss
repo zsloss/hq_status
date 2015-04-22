@@ -33,13 +33,21 @@ h1 {
 	  div {
 		display: inline-block;
 
-		&.task-name {
-			width: 40%;
+		&.flow, &.task-name {
+			span {			
+				font-size: 18px;
+			}
+		}
 
-			span {
-				font-weight: bold;
-							font-size: 18px;
-				
+		&.flow {
+		width: 15%;
+		}
+
+		&.task-name {
+			width: 35%;
+
+			span {				
+			font-weight: bold;
 				word-spacing: 5px;
 			}
 		}
@@ -53,7 +61,20 @@ h1 {
 
 		&.draft {
 			
-		}	
+		}
+
+		&.task-writer {
+			width: 10%;
+		}
+
+		&.sent {
+			margin-left: -150px;
+			width: 200px;
+		}
+
+		&.pr-done {
+
+		}
 
 		span {
 			margin-left: 15px;
@@ -77,10 +98,6 @@ h1 {
 		div {
 			display: block;
 			margin-bottom: 20px;
-		}	
-
-		.flow {
-
 		}
 
 		.start-date {

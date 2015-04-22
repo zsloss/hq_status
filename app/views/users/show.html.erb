@@ -8,6 +8,11 @@
     <div class="panel-heading">
 
       <a data-toggle="collapse" href="#collapse-<%= task.id %>" data-parent="#remaining-tasks">
+        <div class="flow">
+    <span>
+      <%= task.flow %>
+    </span>
+  </div>
         <div class="task-name">    
           <span>
             <%= task.name %>
@@ -64,10 +69,6 @@
         </div>
 
         <div class="task-info">
-
-          <div class="flow">
-            <span>Flow: <strong><%= task.flow %></strong></span>
-          </div>
 
           <div class="start-date">
             <span>Start Date: </span>
@@ -132,29 +133,49 @@ Writer
 Status
 Sent for Review
 
-
+<div class="panel-group" id="remaining-tasks">
+  <div class="panel panel-default">
 <% @peer_reviews.each do |task| %>
+<div class="panel-heading">
 
-<%= task.flow %>
-<%= task.name %>
-<%= task.writer %>
-<%= task.status %>
+  <div class="flow">
+    <span>
+      <%= task.flow %>
+    </span>
+  </div>
+  <div class="task-name">    
+    <span>
+      <%= task.name %>
+    </span>
+  </div>
+  <div class="task-writer">    
+    <span>
+      <%= task.writer %>
+    </span>
+  </div>
+  <div class="status">
+    <%= task.status %> 
+  </div>
 
+<div class="sent">
 <span class="<%= task.review_status == 'Not Sent' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok' %>"></span>
 <% if task.review_sent_date %>
 <%= " (#{days_ago task.review_sent_date})" %>
 <% end %>
+</div>
 
-
+<div class="pr-done">
 <%= form_for task do |f| %>
 <%= f.hidden_field :review_status, value: "Reviewed" %>
 <%= f.hidden_field :review_date, value: Date.today %>
 <%= f.submit "Peer Review Done", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
 <% end %>
+</div>
 
-
+</div>
 <% end %>
-
+</div>
+</div>
 
 <h3>Completed Tasks</h3>
 
