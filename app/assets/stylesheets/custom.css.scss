@@ -17,6 +17,57 @@ h1 {
 	color: red;
 }
 
+$pad: 44px;
+$plusMinusWidth: 14px;
+$plusMinusMargin: 14px;
+$flowWidth: 15%;
+$taskWidth: 35%;
+$statusWidth: 20%;
+$writerWidth: 10%;
+._sent {
+	margin-left: -100px;
+	width: 150px;
+}
+
+.headings {
+
+	padding-left: $pad - $plusMinusWidth - $plusMinusMargin;
+	padding-right: $pad;
+
+	> * {
+			display: inline-block;	
+
+			&.h-plus-minus {
+			width: $plusMinusWidth;
+			margin-right: $plusMinusMargin;
+			}		
+
+			&.h-flow {
+				width: $flowWidth;
+			}
+
+			&.h-task {
+				width: $taskWidth;
+			}
+
+			&.h-status {
+				width: $statusWidth;
+			}
+
+			&.h-draft {
+
+			}
+
+			&.h-writer {
+				width: $writerWidth;
+			}
+
+			&.h-sent {
+				@extend ._sent;
+			}
+		}
+}
+
 .panel-heading, .panel-body {
 	form, button, select {
 		display: inline-block;
@@ -24,7 +75,9 @@ h1 {
 }
 
 .panel-heading {
-	height: 60px;
+	height: 54px;
+	padding-left: $pad - $plusMinusWidth - $plusMinusMargin;
+	padding-right: $pad;
 
 	a {
 		text-decoration: none;
@@ -33,6 +86,11 @@ h1 {
 	  div {
 		display: inline-block;
 
+		&.plus-minus {
+			width: $plusMinusWidth;
+			margin-right: $plusMinusMargin;
+		}
+
 		&.flow, &.task-name {
 			span {			
 				font-size: 18px;
@@ -40,11 +98,11 @@ h1 {
 		}
 
 		&.flow {
-		width: 15%;
+		width: $flowWidth;
 		}
 
 		&.task-name {
-			width: 35%;
+			width: $taskWidth;
 
 			span {				
 			font-weight: bold;
@@ -53,32 +111,28 @@ h1 {
 		}
 
 		&.status {
-			width: 20%;
+			width: $statusWidth;
 			select {
 				width: 130px;
 			}
 		}
 
 		&.draft {
-			
+			span {
+				margin-left: 20px;
+			}
 		}
 
 		&.task-writer {
-			width: 10%;
+			width: $writerWidth;
 		}
 
 		&.sent {
-			margin-left: -150px;
-			width: 200px;
+			@extend ._sent;
 		}
 
 		&.pr-done {
 
-		}
-
-		span {
-			margin-left: 15px;
-			margin-right: 15px;
 		}
 	}
 }

@@ -1,6 +1,16 @@
 
 <h1><%= @user.name %>'s Tasks</h1>
 
+<div class="headings">
+  <div class="h-plus-minus"></div>
+  <div class="h-task"><h3>Document</h3></div>
+  <div class="h-flow"><h3>Flow</h3></div>
+  <div class="h-status"><h3>Status</h3></div>
+  <div class="h-draft"><h3>Latest Draft</h3></div>
+</div>
+
+
+
 <div class="panel-group" id="remaining-tasks">
   <div class="panel panel-default">
     <% @remaining_tasks.each do |task| %>
@@ -8,19 +18,21 @@
     <div class="panel-heading">
 
       <a data-toggle="collapse" href="#collapse-<%= task.id %>" data-parent="#remaining-tasks">
-        <div class="flow">
-    <span>
-      <%= task.flow %>
-    </span>
-  </div>
-        <div class="task-name">    
-          <span>
-            <%= task.name %>
-          </span>
+        <div class="plus-minus">
+          <span class="glyphicon glyphicon-plus"></span>
         </div>
       </a>
+      <div class="task-name">    
+        <span>
+          <%= task.name %>
+        </span>
+      </div>
+      <div class="flow">
+        <span>
+          <%= task.flow %>
+        </span>
+      </div>
 
-      
       <!-- Status -->
       <div class="status">
         <%= form_for task do |f| %>
@@ -125,56 +137,57 @@
 
 <h3>Peer Reviews</h3>
 
-
-
-Flow
-Document
-Writer
-Status
-Sent for Review
+<div class="headings">  
+  <div class="h-task"><h3>Document</h3></div>
+  <div class="h-flow"><h3>Flow</h3></div>
+  <div class="h-writer"><h3>Writer</h3></div>
+  <div class="h-status"><h3>Status</h3></div>
+  <div class="h-sent"><h3>Sent For PR</h3></div>
+</div>
 
 <div class="panel-group" id="remaining-tasks">
   <div class="panel panel-default">
-<% @peer_reviews.each do |task| %>
-<div class="panel-heading">
+    <% @peer_reviews.each do |task| %>
 
-  <div class="flow">
-    <span>
-      <%= task.flow %>
-    </span>
-  </div>
-  <div class="task-name">    
-    <span>
-      <%= task.name %>
-    </span>
-  </div>
-  <div class="task-writer">    
-    <span>
-      <%= task.writer %>
-    </span>
-  </div>
-  <div class="status">
-    <%= task.status %> 
-  </div>
+    <div class="panel-heading">
 
-<div class="sent">
-<span class="<%= task.review_status == 'Not Sent' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok' %>"></span>
-<% if task.review_sent_date %>
-<%= " (#{days_ago task.review_sent_date})" %>
-<% end %>
-</div>
+      <div class="task-name">    
+        <span>
+          <%= task.name %>
+        </span>
+      </div>
+      <div class="flow">
+        <span>
+          <%= task.flow %>
+        </span>
+      </div>
+      <div class="task-writer">    
+        <span>
+          <%= task.writer %>
+        </span>
+      </div>
+      <div class="status">
+        <%= task.status %> 
+      </div>
 
-<div class="pr-done">
-<%= form_for task do |f| %>
-<%= f.hidden_field :review_status, value: "Reviewed" %>
-<%= f.hidden_field :review_date, value: Date.today %>
-<%= f.submit "Peer Review Done", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
-<% end %>
-</div>
+      <div class="sent">
+        <span class="<%= task.review_status == 'Not Sent' ? 'glyphicon glyphicon-remove' : 'glyphicon glyphicon-ok' %>"></span>
+        <% if task.review_sent_date %>
+        <%= " (#{days_ago task.review_sent_date})" %>
+        <% end %>
+      </div>
 
-</div>
-<% end %>
-</div>
+      <div class="pr-done">
+        <%= form_for task do |f| %>
+        <%= f.hidden_field :review_status, value: "Reviewed" %>
+        <%= f.hidden_field :review_date, value: Date.today %>
+        <%= f.submit "Peer Review Done", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
+        <% end %>
+      </div>
+
+    </div>
+    <% end %>
+  </div>
 </div>
 
 <h3>Completed Tasks</h3>
