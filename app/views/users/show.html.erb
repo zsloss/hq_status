@@ -135,7 +135,7 @@
 
 <br>
 
-<h3>Peer Reviews</h3>
+<h2>Peer Reviews</h2>
 
 <div class="headings">  
   <div class="h-task"><h3>Document</h3></div>
@@ -190,28 +190,56 @@
   </div>
 </div>
 
-<h3>Completed Tasks</h3>
+<br>
 
+<h2>Completed Tasks</h2>
 
-Flow
-Document
-Completion Date
+<div class="headings">  
+  <div class="h-task"><h3>Document</h3></div>
+  <div class="h-flow"><h3>Flow</h3></div>
+  <div class="h-completion-date"><h3>Completion Date</h3></div>
+</div>
 
+<div class="panel-group" id="remaining-tasks">
+  <div class="panel panel-default">
 <% @finished_tasks.each do |task| %>
+<div class="panel-heading">
 
-<%= task.flow %>
-<%= task.name %>
+<div class="task-name">    
+        <span>
+          <%= task.name %>
+        </span>
+      </div>
+<div class="flow">
+        <span>
+          <%= task.flow %>
+        </span>
+      </div>
+<div class="completion-date">
+        <span>
+<%= task.completion_date.strftime("%B #{task.start_date.day.ordinalize}") or '' %>
+</span>
+</div>
 
-<%= task.completion_date ? task.completion_date : '' %>
-
-
+<div class="resurrect">
 <%= form_for task do |f| %>
 <%= f.hidden_field :done, value: false %>
 <%= f.hidden_field :completion_date, value: nil %>
 <%= f.submit "Resurrect", { class: "btn btn-default", data: { confirm: 'Are you sure?'} } %>
 <% end %>
+</div>
 
-<%= link_to 'Edit', edit_task_path(task) %>
-<%= link_to 'Delete', task, method: :delete, data: { confirm: 'Are you sure?' } %>
+<div class="task-actions"
+<%= link_to edit_task_path(task) do %>
+          <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
 
+          <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <span class="glyphicon glyphicon-trash"></span>
+          <% end %>  
+          </div> 
+
+</div>
 <% end %>
+</div>
+</div>

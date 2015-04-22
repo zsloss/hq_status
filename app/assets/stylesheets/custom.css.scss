@@ -105,7 +105,7 @@ $writerWidth: 10%;
 			width: $taskWidth;
 
 			span {				
-			font-weight: bold;
+				font-weight: bold;
 				word-spacing: 5px;
 			}
 		}
@@ -133,6 +133,20 @@ $writerWidth: 10%;
 
 		&.pr-done {
 
+		}
+
+		&.completion-date {
+			width: 25%;
+		}
+
+		&.resurrect {
+			width: 15%;
+		}
+
+		&.task-actions{
+			span.glyphicon-pencil, span.glyphicon-trash {
+			margin: 0 10px 0 10px;
+			}
 		}
 	}
 }
