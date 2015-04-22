@@ -204,3 +204,19 @@ $writerWidth: 10%;
 		}
 	}
 }
+
+@media (max-width: 1199px) {
+	.flow, .draft, .notes, .task-writer, .h-flow, .h-draft, .h-writer {
+		display: none !important;
+	}
+
+	.task-name > span {
+		font-size: 12px !important;
+		/*font-weight: normal !important;*/
+	}
+
+	._sent {
+		margin-left: 0 !important;
+		width: 30% !important;
+	}
+}
