@@ -88,6 +88,14 @@ $writerWidth: 10%;
 
 	  div {
 		display: inline-block;
+		vertical-align: middle;
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		&.flow:hover, &.task-name:hover {
+			overflow: auto;
+			text-overflow: clip;
+		}
 
 		&.plus-minus {
 			width: $plusMinusWidth;
@@ -212,7 +220,7 @@ $writerWidth: 10%;
 }
 
 @media (max-width: 1199px) {
-	.flow, .draft, .task-writer, .h-flow, .h-draft, .h-writer {
+	.flow, .task-writer, .h-flow, .h-writer {
 		display: none !important;
 	}
 
@@ -239,7 +247,7 @@ $writerWidth: 10%;
 }
 
 @media (max-width: 600px) {
-	.sent, .h-sent, .h-completion-date, .notes, .completion-date, #peer-reviews div.status {
+	.sent, .h-sent, .draft, .h-draft, .h-completion-date, .notes, .completion-date, #peer-reviews div.status {
 		display: none !important;
 	}
 
