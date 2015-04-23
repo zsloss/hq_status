@@ -102,6 +102,7 @@ $writerWidth: 10%;
 				font-size: 18px;
 				font-weight: bold;
 				word-spacing: 5px;
+				white-space: nowrap;
 			}
 		}
 
@@ -217,5 +218,11 @@ $writerWidth: 10%;
 	._sent {
 		margin-left: 0 !important;
 		width: 30% !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.task-info {
+		display: none !important;
 	}
 }
