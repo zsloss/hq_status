@@ -27,6 +27,7 @@ $writerWidth: 10%;
 ._sent {
 	margin-left: -100px;
 	width: 150px;
+	white-space: nowrap;
 }
 
 .headings {
@@ -78,6 +79,8 @@ $writerWidth: 10%;
 	height: 54px;
 	padding-left: $pad - $plusMinusWidth - $plusMinusMargin;
 	padding-right: $pad;
+
+	white-space: nowrap;
 
 	a {
 		text-decoration: none;
@@ -151,6 +154,8 @@ $writerWidth: 10%;
 	height: 100px;
 	vertical-align: top;
 
+	white-space: nowrap;
+
 	> div {
 		display: inline-block;
 		vertical-align: top;
@@ -207,8 +212,20 @@ $writerWidth: 10%;
 }
 
 @media (max-width: 1199px) {
-	.flow, .draft, .notes, .task-writer, .h-flow, .h-draft, .h-writer {
+	.flow, .draft, .task-writer, .h-flow, .h-draft, .h-writer {
 		display: none !important;
+	}
+
+	.task-info {
+		margin-right: 0 !important;
+	}
+
+	.notes {
+		width: 30% !important;
+		.btn {
+			position: relative !important;
+			left: 50px !important;
+		}
 	}
 
 	.task-name > span {
@@ -217,12 +234,22 @@ $writerWidth: 10%;
 
 	._sent {
 		margin-left: 0 !important;
-		width: 30% !important;
+		width: 10% !important;
 	}
 }
 
-@media (max-width: 480px) {
-	.task-info {
+@media (max-width: 600px) {
+	.sent, .h-sent, .h-completion-date, .notes, .completion-date, #peer-reviews div.status {
 		display: none !important;
+	}
+
+	.headings {
+		h3 {
+			font-size: 10px !important;
+		}
+	}
+
+	.task-actions {
+		margin-left: 50px !important;
 	}
 }
