@@ -7,3 +7,7 @@ $ ->
 		glyph = $(this).children('span')
 		$('.glyphicon-minus').removeClass('glyphicon-minus').addClass('glyphicon-plus') unless glyph.hasClass('glyphicon-minus')
 		glyph.toggleClass('glyphicon-plus').toggleClass('glyphicon-minus')
+
+	$('#new-task-btn').click ->
+		if not $('#new-task').hasClass('collapsing')
+			$(this).children('span').toggleClass('glyphicon-minus').toggleClass('glyphicon-plus')

@@ -1,4 +1,23 @@
 
+
+
+<button class="btn btn-default" id="new-task-btn" type="button" data-toggle="collapse" data-target="#new-task">
+  <span class="glyphicon glyphicon-plus"></span> New Task
+</button>
+<div class="collapse" id="new-task">
+  
+<div class="row">
+  <div class="col-sm-3">
+
+    <%= render 'shared/new_form' %>
+
+ 
+</div>
+</div>
+</div>
+
+<br>
+
 <h1><%= @user.name %>'s Tasks</h1>
 
 <div class="headings">
@@ -122,14 +141,6 @@
     </div>
 
     <% end %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-sm-3">
-
-    <%= render 'shared/new_form' %>
-
   </div>
 </div>
 
