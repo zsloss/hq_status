@@ -218,6 +218,10 @@ $writerWidth: 10%;
 	}
 }
 
+.btn-success {
+	border-radius: 10px !important;
+}
+
 @media (max-width: 1199px) {
 	.flow, .task-writer, .h-flow, .h-writer {
 		display: none !important;

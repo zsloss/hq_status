@@ -10,4 +10,4 @@ $ ->
 
 	$('#new-task-btn').click ->
 		if not $('#new-task').hasClass('collapsing')
-			$(this).children('span').toggleClass('glyphicon-minus').toggleClass('glyphicon-plus')
+			$(this).children('span').toggleClass('glyphicon-minus-sign').toggleClass('glyphicon-plus-sign')
