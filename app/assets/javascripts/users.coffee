@@ -4,10 +4,11 @@
 
 $ ->
 	$('.plus-minus').click ->
-		glyph = $(this).children('span')
-		$('.glyphicon-minus').removeClass('glyphicon-minus').addClass('glyphicon-plus') unless glyph.hasClass('glyphicon-minus')
-		glyph.toggleClass('glyphicon-plus').toggleClass('glyphicon-minus')
+		unless $('.collapsing').length > 0
+			glyph = $(this).children('span')
+			$('.glyphicon-minus').removeClass('glyphicon-minus').addClass('glyphicon-plus') unless glyph.hasClass('glyphicon-minus')
+			glyph.toggleClass('glyphicon-plus').toggleClass('glyphicon-minus')
 
 	$('#new-task-btn').click ->
-		if not $('#new-task').hasClass('collapsing')
+		unless $('#new-task').hasClass('collapsing')
 			$(this).children('span').toggleClass('glyphicon-minus-sign').toggleClass('glyphicon-plus-sign')
