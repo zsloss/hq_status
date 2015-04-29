@@ -16,7 +16,7 @@
 <% @users.each do |user| %>
 <h2><%= user.name %></h2>
 
-<%= render 'tasks_table', tasks: sort_tasks(user.tasks), unassigned: false %>
+<%= render 'tasks_table', tasks: sort_tasks(user.tasks.where(done: false)), unassigned: false %>
 
 <% end %>
 </div>
